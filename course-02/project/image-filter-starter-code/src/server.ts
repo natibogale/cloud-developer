@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
+import * as fs from 'fs';
 
 (async () => {
 
@@ -27,6 +28,29 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
+
+  app.get('/filteredimage', (req, res) => {
+    // Validate the image_url query parameter
+    const imageUrl:string = req.query.image_url.toString();
+    if (!imageUrl) {
+      return res.status(400).send({ error: 'Missing image_url query parameter' });
+    }
+  
+    // Call filterImageFromURL to filter the image
+    filterImageFromURL(imageUrl)
+      .then((filteredPath) => {
+        // Send the resulting file in the response
+        res.sendFile(filteredPath, () => {
+          // Delete the file from the server on finish of the response
+          fs.unlinkSync(filteredPath);
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send({ error: 'Failed to filter image' });
+      });
+  });
+  
   /**************************************************************************** */
 
   //! END @TODO1
