@@ -1,5 +1,7 @@
 # Udagram Image Filtering Microservice
 
+## Image Filtering Project 
+
 ### Elastic Beanstalk Endpoint:-   [image-filter-app-prod.us-east-1.elasticbeanstalk.com](image-filter-app-prod.us-east-1.elasticbeanstalk.com)
 ### Project Github Repo:- [https://github.com/natibogale/cloud-developer/tree/master/course-02/project/image-filter-starter-code](https://github.com/natibogale/cloud-developer/tree/master/course-02/project/image-filter-starter-code)
 
